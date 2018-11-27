@@ -1,0 +1,44 @@
+{% import "./templates/form.nj" as form %}
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="UTF-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1.0">
+		<meta http-equiv="X-UA-Compatible" content="ie=edge">
+		<link rel="stylesheet" href="css/bootstrap.min.css">
+		<link rel="stylesheet" href="css/main.css">
+		<title>Profile</title>
+	</head>
+	<body>
+		<div class="app container">
+			<div class="header">
+				<div class="row">
+					<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#addPost">Добавить пост</button>
+					<form action="/log-out" method="post" class="col-3 ml-auto row">
+						<button type="submit" class="btn btn-primary col-12">выйти</button>
+					</form>
+				</div>
+			</div>
+			<div class="main">
+				<div class="row">
+				{% if posts | length > 0 %}
+					{% for item in posts %}
+						<div class="col-12">
+							{{ item }}
+						</div>
+					{% endfor %}
+				{% else %}
+					<div class="col-12">
+						<h3>Вы не добавили ни одного поста...</h3>
+					</div>
+				{% endif %}
+				</div>
+			</div>
+		</div>
+		{{ form.addPost() }}
+		<script src="https://cdn.jsdelivr.net/npm/vue@2.5.17/dist/vue.js"></script>
+		<script src="/js/jquery.min.js"></script>
+		<script src="/js/bootstrap.min.js"></script>
+		<script src="/js/main.js"></script>
+	</body>
+</html>

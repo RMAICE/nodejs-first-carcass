@@ -1,0 +1,110 @@
+{% macro auth(obj) %}
+<div class="auth">
+	<h1>Форма входа</h1>
+	{% if obj.error | length > 0 %}
+		<span class="badge badge-pill badge-danger">{{ obj.error }}</span>
+	{% endif %}
+	{% if obj.message | length > 0 %}
+		<span class="badge badge-pill badge-success">{{ obj.message }}</span>
+	{% endif %}
+	<form action="/sign-in" method="post">
+		<div class="form-group">
+			<label for="exampleInputEmail1">Почта</label>
+			<input name="email" type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Введите email">
+		</div>
+		<div class="form-group">
+			<label for="exampleInputPassword1">Пароль</label>
+			<input name="password" type="password" class="form-control" id="exampleInputPassword1" placeholder="Пароль">
+		</div>
+		<button type="submit" class="btn btn-primary">Войти</button>
+	</form>
+</div>
+{% endmacro %}
+
+{% macro signUp(obj) %}
+<div class="reg">
+	<h1>Форма регистрации</h1>
+	{% if obj.error | length > 0 %}
+	<span class="badge badge-pill badge-danger">{{ obj.error }}</span>
+	{% endif %}
+	{% if obj.message | length > 0 %}
+	<span class="badge badge-pill badge-success">{{ obj.message }}</span>
+	{% endif %}
+	<form id="signUpForm" action="/sign-up" method="post" target="_self">
+		<div class="form-group">
+			<label for="exampleInputEmail2">Почта</label>
+			<input id="exampleInputEmail2" required name="email" type="email" class="form-control" aria-describedby="emailHelp"
+			 placeholder="Введите email">
+		</div>
+		<div class="form-group">
+			<label for="exampleInputPassword2">Пароль</label>
+			<input id="exampleInputPassword2" required name="password" type="password" class="form-control" placeholder="Пароль">
+		</div>
+		<div class="form-group">
+			<label for="exampleInputPassword3">Повторите пароль</label>
+			<input id="exampleInputPassword3" required name="repeatPassword" type="password" class="form-control" placeholder="Повторите пароль">
+		</div>
+		<button type="submit" class="btn btn-primary">Регистрация</button>
+	</form>
+	<iframe name="hiddenFrame" width="0" height="0" border="0" style="visibility:hidden; opacity: 0;"></iframe>
+</div>
+{% endmacro %}
+
+{% macro changePost(arg) %}
+<div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+	<form class="modal-dialog">
+		<div class="modal-content">
+			<div class="modal-header">
+				<h5 class="modal-title" id="exampleModalLabel">New message</h5>
+				<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+					<span aria-hidden="true">&times;</span>
+				</button>
+			</div>
+			<div class="modal-body">
+				<form>
+					<div class="form-group">
+						<label for="recipient-name" class="col-form-label">Recipient:</label>
+						<input type="text" class="form-control" id="recipient-name">
+					</div>
+					<div class="form-group">
+						<label for="message-text" class="col-form-label">Message:</label>
+						<textarea class="form-control" id="message-text"></textarea>
+					</div>
+				</form>
+			</div>
+			<div class="modal-footer">
+				<button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+				<button type="button" class="btn btn-primary">Send message</button>
+			</div>
+		</div>
+	</form>
+</div>
+{% endmacro %}
+
+{% macro addPost(arg) %}
+<div class="modal fade" id="addPost" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+	<form class="modal-dialog">
+		<div class="modal-content">
+			<div class="modal-body">
+				<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+					<span aria-hidden="true">&times;</span>
+				</button>
+				<form>
+					<div class="form-group">
+						<label for="recipient-name" class="col-form-label">Title:</label>
+						<input type="text" class="form-control" id="recipient-name">
+					</div>
+					<div class="form-group">
+						<label for="message-text" class="col-form-label">Text:</label>
+						<textarea class="form-control" id="message-text"></textarea>
+					</div>
+				</form>
+			</div>
+			<div class="modal-footer">
+				<button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+				<button type="submit" class="btn btn-primary">Send message</button>
+			</div>
+		</div>
+	</form>
+</div>
+{% endmacro %}
