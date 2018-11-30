@@ -2,3 +2,14 @@
 	padding-top: 30px;
 	margin-bottom: 30px;
 }
+
+.icon {
+	display: block;
+	width: 30px;
+	height: 30px;
+	background-size: contain;
+}
+
+.icon-kebab {
+	background-image: url('/assets/kebab-vert.png');
+}

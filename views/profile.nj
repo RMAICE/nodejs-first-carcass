@@ -1,4 +1,5 @@
 {% import "./templates/form.nj" as form %}
+{% import "./templates/media.nj" as media %}
 <!DOCTYPE html>
 <html lang="en">
 	<head>
@@ -13,7 +14,7 @@
 		<div class="app container">
 			<div class="header">
 				<div class="row">
-					<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#addPost">Добавить пост</button>
+					<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#addArticle">Добавить пост</button>
 					<form action="/log-out" method="post" class="col-3 ml-auto row">
 						<button type="submit" class="btn btn-primary col-12">выйти</button>
 					</form>
@@ -21,11 +22,9 @@
 			</div>
 			<div class="main">
 				<div class="row">
-				{% if posts | length > 0 %}
-					{% for item in posts %}
-						<div class="col-12">
-							{{ item }}
-						</div>
+				{% if articles | length > 0 %}
+					{% for item in articles %}
+						{{ media.article(item) }}
 					{% endfor %}
 				{% else %}
 					<div class="col-12">
@@ -35,9 +34,10 @@
 				</div>
 			</div>
 		</div>
-		{{ form.addPost() }}
-		<script src="https://cdn.jsdelivr.net/npm/vue@2.5.17/dist/vue.js"></script>
+		{{ form.addArticle(addArticle) }}
+		{{ form.changeArticle(changeArticle) }}
 		<script src="/js/jquery.min.js"></script>
+		<script src="/js/popper.js"></script>
 		<script src="/js/bootstrap.min.js"></script>
 		<script src="/js/main.js"></script>
 	</body>

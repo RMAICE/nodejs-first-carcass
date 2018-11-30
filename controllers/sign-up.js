@@ -14,7 +14,8 @@ function generateFields(data) {
 		password: passHash,
 		email: emailHash,
 		refEmail: data.email,
-		refPassword: data.password
+		refPassword: data.password,
+		articles: []
 	}
 }
 
@@ -41,32 +42,30 @@ module.exports = async function (req, res, next) {
 		let user
 
 		if (validate.email(req.body.email) < 0) {
-
 			let error = message.err('signUp', 'Ошибка в поле Email')
 			return res.render('home.nj', error)
+		}
 
-		} else if (validate.psw(req.body.password) < 0) {
-
+		if (validate.psw(req.body.password) < 0) {
 			let error = message.err('signUp', 'Ошибка в поле Password')
 			return res.render('home.nj', error)
+		}
 
-		} else if (validate.pswRepeat(req.body.password, req.body.repeatPassword)) {
-
+		if (validate.pswRepeat(req.body.password, req.body.repeatPassword)) {
 			let error = message.err('signUp', 'Пароли не совпадают')
 			return res.render('home.nj', error)
+		}
 
-		} else if (foundedLogins.length > 0) {
-
+		if (foundedLogins.length > 0) {
 			let error = message.err('signUp', 'Такой Email уже существует')
 			return res.render('home.nj', error)
-
-		} else {
-			let succes = message.succ('signUp', 'Вы успешно зарегистрированы')
-			user = generateFields(req.body)
-			await db.collection('users').insertOne(user)
-
-			return res.render('home.nj', succes)
 		}
+
+		let succes = message.succ('signUp', 'Вы успешно зарегистрированы')
+		user = generateFields(req.body)
+		await db.collection('users').insertOne(user)
+
+		return res.render('home.nj', succes)
 	} catch (err) {
 		let error = message.err('signUp', 'Ошибка сервера')
 		return res.render('home.nj', error)

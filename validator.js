@@ -10,8 +10,20 @@ function pswRepeat (password, repeatPassword) {
 	return password !== repeatPassword
 }
 
+function isEmpty(...str) {
+	let result = false
+
+	str.map(string => {
+		if (string.trim().length === 0)
+			result = true
+	})
+
+	return result
+}
+
 module.exports = {
 	email,
 	psw,
-	pswRepeat
+	pswRepeat,
+	isEmpty
 }

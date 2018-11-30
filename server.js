@@ -21,11 +21,17 @@ app.use('/css', express.static(__dirname + '/css'))
 app.use('/js', express.static(__dirname + '/node_modules/bootstrap/dist/js'))
 app.use('/js', express.static(__dirname + '/node_modules/jquery/dist'))
 app.use('/js', express.static(__dirname + '/js'))
+app.use('/assets', express.static(__dirname + '/assets'))
 
 app.get(['/', '/auth'], middlewares.auth, controllers.profile)
 
 app.post('/sign-in', controllers.signIn)
 app.post('/sign-up', controllers.signUp)
-app.post('/log-out', controllers.logOut)
+app.post('/log-out', middlewares.auth, controllers.logOut)
+app.post('/article', middlewares.auth, controllers.article.create)
+
+app.put('/article', middlewares.auth, controllers.article.update)
+
+app.delete('/article', middlewares.auth, controllers.article.remove)
 
 app.listen(3000)
